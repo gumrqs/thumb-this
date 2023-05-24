@@ -11,7 +11,46 @@ datasource db {
 }
 
 model Image { 
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  image     String    
-  compress  Int
+  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+  image                 String    
+  compress              Float
+  localpathOriginal     String
+  localpathThumb        String 
+  Exif                  Exif[]
 }
+
+model Exif {
+  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+  imageId               String    @db.ObjectId       
+  Image                 Image     @relation(fields: [imageId], references: [id])    
+  make                  String
+  model                 String
+  orientation           String
+  xResolution           Int
+  yResolution           Int
+  resolutionUnit        String
+  software              String
+  modifyDate            String
+  hostComputer          String
+  tileWidth             Int
+  tileLength            Int
+  exposureTime          Float
+  fNumber               Float
+  exposureProgram       String
+  iSO                   Int
+  exifVersion           String
+  dateTimeOriginal      String
+  createDate            String
+  offsetTime            String
+  offsetTimeOriginal    String
+  offsetTimeDigitized   String
+  shutterSpeedValue     Float
+  apertureValue         Float
+  brightnessValue       Float
+  exposureCompensation  Float
+  meteringMode          String
+  flash                 String
+  focalLength           Float
+  exifImageWidth        Int
+  exifImageHeight       Int
+  }

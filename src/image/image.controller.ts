@@ -1,24 +1,19 @@
 import { Controller, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
 import { ImageService } from './image.service';
 import { Image } from '@prisma/client';
-import { error } from 'console';
+import { PostResponseDto } from './dto/postResponse.dto';
 
-/* class UnprocessableEntityException extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = 'UnprocessableEntityException';
-  }
-} */
 @Controller('image')
 export class ImageController {
   constructor(private readonly imageService: ImageService) {}
 
   @Post('save')
-  async postImage(@Body() { image, compress }: { image: string, compress: number }) {
+  async postImage(@Body() { image, compress }: Partial<Image>): Promise<PostResponseDto> {
     try {
       const imagePath = await this.imageService.downloadAndSaveImage(image);
-      const resizedImageBuffer = await this.imageService.imageResize(imagePath, compress, image);
-      return resizedImageBuffer;
+      const resizedImage = await this.imageService.imageResize(imagePath, compress, image);
+      
+      return resizedImage;
      
     } catch (error) {
      
