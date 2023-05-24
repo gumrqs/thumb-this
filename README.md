@@ -1,73 +1,145 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Thumb this
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+O presente projeto tem como objetivo redimensionar imagens de acordo com o fator de compactação enviado.
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Documentação da API
 
-## Installation
+#### Salva imagem original e redimensionada e retorna seus metadados
 
-```bash
-$ npm install
+```http
+  POST /image/save
 ```
 
-## Running the app
+
+## Rodando a Aplicação
+
+Para rodar a aplicação, rode os seguintes comandos:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+  git clone https://github.com/gumrqs/thumb-this.git
+```
+```bash 
+  npm i && npx prisma generate 
+```
+```bash 
+  npm start 
 ```
 
-## Test
+## Exemplo 1 de Requisição POST
+### Body:
+```javascript
+{
+    "image": "https://assets.storage.trakto.io/AkpvCuxXGMf3npYXajyEZ8A2APn2/0e406885-9d03-4c72-bd92-c6411fbe5c49.jpeg",
+    "compress": 0.9
+}
 
-```bash
-# unit tests
-$ npm run test
+```
+### Retorno (Sucesso):
+```javascript
+{
+  "localpath": {
+    "original": "/home/erick/Gustavo/thumb-this/images/0e406885-9d03-4c72-bd92-c6411fbe5c49_original.jpg",
+    "thumb": "/home/erick/Gustavo/thumb-this/images/0e406885-9d03-4c72-bd92-c6411fbe5c49_thumb.jpg"
+  },
+  "metadata": {
+    "Make": "Apple",
+    "Model": "iPhone 11",
+    "Orientation": "Horizontal (normal)",
+    "XResolution": 72,
+    "YResolution": 72,
+    "ResolutionUnit": "inches",
+    "Software": "16.1.1",
+    "ModifyDate": "2022-11-17T23:13:59.000Z",
+    "HostComputer": "iPhone 11",
+    "TileWidth": 512,
+    "TileLength": 512,
+    "ExposureTime": 0.023809523809523808,
+    "FNumber": 1.8,
+    "ExposureProgram": "Normal program",
+    "ISO": 320,
+    "ExifVersion": "2.3.2",
+    "DateTimeOriginal": "2022-11-17T23:13:59.000Z",
+    "CreateDate": "2022-11-17T23:13:59.000Z",
+    "OffsetTime": "-03:00",
+    "OffsetTimeOriginal": "-03:00",
+    "OffsetTimeDigitized": "-03:00",
+    "ShutterSpeedValue": 5.381182507010322,
+    "ApertureValue": 1.6959938128383605,
+    "BrightnessValue": -0.6750610904449875,
+    "ExposureCompensation": -1.3275746571237175,
+    "MeteringMode": "Pattern",
+    "Flash": "Flash did not fire, compulsory flash mode",
+    "FocalLength": 4.25,
+    "SubjectArea": {
+      "0": 1996,
+      "1": 1499,
+      "2": 2206,
+      "3": 1387
+    },
+    "SubSecTimeOriginal": "890",
+    "SubSecTimeDigitized": "890",
+    "ExifImageWidth": 3024,
+    "ExifImageHeight": 4032,
+    "SensingMethod": "One-chip color area sensor",
+    "SceneType": "Directly photographed",
+    "ExposureMode": "Auto",
+    "WhiteBalance": "Auto",
+    "FocalLengthIn35mmFormat": 26,
+    "LensInfo": [
+      1.5399999618512084,
+      4.25,
+      1.8,
+      2.4
+    ],
+    "LensMake": "Apple",
+    "LensModel": "iPhone 11 back dual wide camera 4.25mm f/1.8",
+    "CompositeImage": "General Composite Image",
+    "GPSLatitudeRef": "S",
+    "GPSLatitude": [
+      9,
+      36,
+      47.24
+    ],
+    "GPSLongitudeRef": "W",
+    "GPSLongitude": [
+      35,
+      43,
+      30.72
+    ],
+    "GPSAltitudeRef": {
+      "0": 0
+    },
+    "GPSAltitude": 56.46832101372756,
+    "GPSSpeedRef": "K",
+    "GPSSpeed": 0.2655744302651217,
+    "GPSImgDirectionRef": "T",
+    "GPSImgDirection": 162.76583850931678,
+    "GPSDestBearingRef": "True North",
+    "GPSDestBearing": 162.76583850931678,
+    "GPSHPositioningError": 7.849353822413682,
+    "latitude": -9.613122222222222,
+    "longitude": -35.7252
+  }
+}
 
-# e2e tests
-$ npm run test:e2e
+```
+## Exemplo 2 de Requisição POST
+### Body:
+```javascript
+{
+    "image": "https://assets.storage.trakto.io/AkpvCuxXGMf3npYXajyEZ8A2APn2/0e406885-9d03-4c72-bd92-c6411fbe5c49.jpeg",
+    "compress": "0.9"
+}
 
-# test coverage
-$ npm run test:cov
 ```
 
-## Support
+### Retorno (Falha):
+```javascript
+{
+  "statusCode": 500,
+  "message": "Error resizing image"
+}
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+```
